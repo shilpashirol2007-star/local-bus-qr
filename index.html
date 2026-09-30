@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Bus Timings</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef5ff;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .header {
+            text-align: center;
+            background: #2563eb;
+            color: white;
+            padding: 25px 15px;
+            border-radius: 0 0 25px 25px;
+            margin: -25px -18px 25px;
+        }
+
+        .bus {
+            font-size: 45px;
+        }
+
+        h1 {
+            margin: 8px 0 5px;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 18px 0;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            font-size: 19px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin: 7px 0;
+            border: none;
+            border-radius: 12px;
+            background: #e8f0ff;
+            color: #1d4ed8;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #dbeafe;
+        }
+
+        #result {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+
+        .time {
+            background: #eef5ff;
+            padding: 13px;
+            margin: 9px 0;
+            border-radius: 10px;
+            font-size: 17px;
+        }
+
+        .back {
+            background: #2563eb;
+            color: white;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="bus">🚌</div>
+        <h1>Local Bus Timings</h1>
+        <p class="subtitle">Quick & easy bus information</p>
+    </div>
+
+
+    <div class="section">
+        <h2>🏫 College → Town</h2>
+
+        <button onclick="showTimes('College → Town', 'Karkala')">
+            Karkala
+        </button>
+
+        <button onclick="showTimes('College → Town', 'Udupi')">
+            Udupi
+        </button>
+    </div>
+
+
+    <div class="section">
+        <h2>🏙️ Town → College</h2>
+
+        <button onclick="showTimes('Town → College', 'Karkala')">
+            Karkala
+        </button>
+
+        <button onclick="showTimes('Town → College', 'Udupi')">
+            Udupi
+        </button>
+    </div>
+
+
+    <div id="result">
+        <h2 id="place"></h2>
+
+        <div id="times"></div>
+
+        <button class="back" onclick="closeTimes()">
+            ← Back
+        </button>
+    </div>
+
+</div>
+
+
+<script>
+
+function showTimes(direction, place) {
+
+    let times = [];
+
+    if (direction == "College → Town" && place == "Karkala")
+        times = ["7:30 AM", "8:30 AM", "10:00 AM"];
+
+    if (direction == "College → Town" && place == "Udupi")
+        times = ["7:45 AM", "9:00 AM", "10:30 AM"];
+
+    if (direction == "Town → College" && place == "Karkala")
+        times = ["4:30 PM", "5:30 PM", "6:30 PM"];
+
+    if (direction == "Town → College" && place == "Udupi")
+        times = ["4:45 PM", "5:45 PM", "6:45 PM"];
+
+
+    document.getElementById("place").innerText =
+        "🚌 " + place + " Timings";
+
+    document.getElementById("times").innerHTML =
+        times.map(time =>
+            `<div class="time">🕐 ${time}</div>`
+        ).join("");
+
+    document.getElementById("result").style.display = "block";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+
+function closeTimes() {
+
+    document.getElementById("result").style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
